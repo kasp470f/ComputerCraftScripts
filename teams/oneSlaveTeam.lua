@@ -36,7 +36,6 @@ function screen()
 end
 
 
-
 while true do
     screen()
     if turtle.getFuelLevel() < 2 then
