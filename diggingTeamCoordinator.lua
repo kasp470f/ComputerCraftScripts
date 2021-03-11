@@ -1,17 +1,10 @@
-if turtle.getFuelLevel() == 0 then turtle.refuel(5) end
 term.clear()
 term.setCursorPos(1,1)
 os.setComputerLabel("Digging Team Coordinator")
 
 -- The mining turtle table
 local miningTurtle = {
-  ["computercraft:turtle"] = true,
-  [1] = true,
-}
-
-local fuel = {
-  ["minecraft:coal"] = true,
-  ["minecraft:stick"] = true,
+  ["computercraft:turtle_expanded"] = true,
 }
 
 local diskDrive = {
@@ -26,9 +19,11 @@ for i=1,16 do
   turtle.select(i)
   local item = turtle.getItemDetail(i)
   if item then
-    if miningTurtle[ item.name ] and miningTurtle[ item.damage ] then
+    if miningTurtle[ item.name ] then
       print("Mining Turtle at inventory slot " .. i .. " (" .. item.count .. ")")
       turtle.transferTo(1) -- Move the turtle to slot 1
+    else
+      turtle.refuel()
     end
   end
 end
@@ -57,7 +52,7 @@ if success then
     end
     if amountOfTurtles <= 3 then
       print("Using One Man Digging Team")
-      fs.copy("teams/oneSlaveTeam.lua", "/disk/startup.lua")
+      fs.copy("teams/oneTeam.lua", "/disk/startup.lua")
       print("Installation of program complete.")
     end
   end
