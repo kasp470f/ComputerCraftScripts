@@ -1,8 +1,6 @@
 os.setComputerLabel("Slave Digger #1")
 turtle.refuel()
 
-print("Please enter the length of the tunnel?")
-lengthto = tonumber(io.read())
 length = 0
 
 function mine()
@@ -32,13 +30,20 @@ function screen()
     term.clear()
     term.setCursorPos(1,1)
     print("Fuel Level: " .. turtle.getFuelLevel() .. " meters")
-    print("Tunnel Length: " .. length+1 .. " / " .. lengthto)
+    print("Tunnel Length: " .. length+1)
 end
 
-while lengthto > length do
+
+
+while true do
+    if turtle.getFuelLevel() < 2 then
+        print("Missing Fuel?!")
+        while turtle.getFuelLevel() < 2 do 
+            turtle.refuel()
+        end
+    end
     screen()
     turtle.refuel()
     mine()
     length = length + 1 
 end
-print("Finshed Tunnel!")
