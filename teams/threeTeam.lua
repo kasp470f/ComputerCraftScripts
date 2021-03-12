@@ -1,3 +1,5 @@
+term.clear()
+term.setCursorPos(1,1)
 local length = 0
 
 function mine()
@@ -14,6 +16,7 @@ end
 function screen() -- Screen reset
     term.clear()
     term.setCursorPos(1,1)
+    print("Turtle ID: " .. os.getComputerID())
     print("Tunnel Length: " .. length+1)
 end
 
@@ -35,7 +38,9 @@ term.clear()
 term.setCursorPos(1,1)
 print("Waiting for signal...")
 rednet.open("right")
-rednet.receive()
+local senderId, message, protocol = rednet.receive()
+while message ~= "Start Mining" do senderId, message, protocol = rednet.receive() end
+print("Signal received.")
 turtle.up()
 
 

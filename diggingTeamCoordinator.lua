@@ -102,7 +102,8 @@ elseif amountOfTurtles >= 9 then
 end
 
 -- Rednet 
-os.sleep(5)
+while turtle.detect() == true do end
+os.sleep(3)
 rednet.open("left")
 rednet.broadcast("Start Mining")
 print("Sending Signal...")
