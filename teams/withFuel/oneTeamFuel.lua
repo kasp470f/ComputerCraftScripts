@@ -1,3 +1,6 @@
+os.setComputerLabel("Digger ")
+turtle.refuel()
+
 local length = 0
 
 function mine()
@@ -11,18 +14,18 @@ function mine()
         turtle.turnLeft()
         turtle.dig()
         turtle.digUp()
-        while turtle.up() == false do end
+        turtle.up()
         turtle.dig()
         turtle.digUp()
-        while turtle.up() == false do end
+        turtle.up()
         turtle.dig()
         --- Dig right side
         turtle.turnRight()
         turtle.turnRight()
         turtle.dig()
-        while turtle.down() == false do end
+        turtle.down()
         turtle.dig()
-        while turtle.down() == false do end
+        turtle.down()
         turtle.dig()
         turtle.turnLeft()
         length = length + 1
@@ -32,11 +35,21 @@ end
 function screen()
     term.clear()
     term.setCursorPos(1,1)
-    print("Tunnel Length: " .. length)
+    print("Fuel Level: " .. turtle.getFuelLevel() .. " meters")
+    print("Tunnel Length: " .. length+1)
 end
+
 
 while true do
     screen()
+    if turtle.getFuelLevel() < 4 then
+        print("Missing Fuel!")
+        while turtle.getFuelLevel() < 4 do 
+            turtle.suckDown(32)
+            turtle.refuel()
+        end
+    end
+    turtle.refuel()
     screen()
     mine()
 end
