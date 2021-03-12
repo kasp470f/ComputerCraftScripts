@@ -9,3 +9,6 @@ The Drone turles will need a pickaxe on the left side and a wireless modem on th
 
 ![setup](setup.png)
 
+
+## Running all programs
+[Video here](https://www.youtube.com/watch?v=yZJrTBDLBRM)
